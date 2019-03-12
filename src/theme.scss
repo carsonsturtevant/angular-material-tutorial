@@ -1,0 +1,121 @@
+@import '~@angular/material/theming';
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+
+$md-customgreen: (
+    50 : #e9f3ef,
+    100 : #c9e0d7,
+    200 : #a5ccbc,
+    300 : #80b7a1,
+    400 : #65a78c,
+    500 : #4a9878,
+    600 : #439070,
+    700 : #3a8565,
+    800 : #327b5b,
+    900 : #226a48,
+    A100 : #abffd6,
+    A200 : #78ffbc,
+    A400 : #45ffa3,
+    A700 : #2bff97,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-customyellow: (
+    50 : #faf6eb,
+    100 : #f3e9ce,
+    200 : #ecdbae,
+    300 : #e4cc8d,
+    400 : #dec174,
+    500 : #d8b65c,
+    600 : #d4af54,
+    700 : #cea64a,
+    800 : #c89e41,
+    900 : #bf8e30,
+    A100 : #ffffff,
+    A200 : #ffeed0,
+    A400 : #ffdc9d,
+    A700 : #ffd384,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-customblack: (
+    50 : #e2e3e4,
+    100 : #b6babc,
+    200 : #858c8f,
+    300 : #545e62,
+    400 : #2f3c40,
+    500 : #0a191e,
+    600 : #09161a,
+    700 : #071216,
+    800 : #050e12,
+    900 : #03080a,
+    A100 : #4fc4ff,
+    A200 : #1cb3ff,
+    A400 : #009be8,
+    A700 : #008ace,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$candy-app-primary: mat-palette($md-customgreen);
+$candy-app-accent:  mat-palette($md-customyellow);
+$candy-app-warn:    mat-palette($mat-deep-orange);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$candy-app-theme: mat-dark-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($candy-app-theme);
