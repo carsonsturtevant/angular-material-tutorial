@@ -5,29 +5,29 @@
 @include mat-core();
 
 
-$md-customgreen: (
-    50 : #e9f3ef,
-    100 : #c9e0d7,
-    200 : #a5ccbc,
-    300 : #80b7a1,
-    400 : #65a78c,
-    500 : #4a9878,
-    600 : #439070,
-    700 : #3a8565,
-    800 : #327b5b,
-    900 : #226a48,
-    A100 : #abffd6,
-    A200 : #78ffbc,
-    A400 : #45ffa3,
-    A700 : #2bff97,
+$md-customorange: (
+    50 : #fdede5,
+    100 : #fad2bf,
+    200 : #f7b495,
+    300 : #f3956a,
+    400 : #f17f4a,
+    500 : #ee682a,
+    600 : #ec6025,
+    700 : #e9551f,
+    800 : #e74b19,
+    900 : #e23a0f,
+    A100 : #ffffff,
+    A200 : #ffe1db,
+    A400 : #ffb7a8,
+    A700 : #ffa28f,
     contrast: (
         50 : #000000,
         100 : #000000,
         200 : #000000,
         300 : #000000,
         400 : #000000,
-        500 : #ffffff,
-        600 : #ffffff,
+        500 : #000000,
+        600 : #000000,
         700 : #ffffff,
         800 : #ffffff,
         900 : #ffffff,
@@ -38,54 +38,21 @@ $md-customgreen: (
     )
 );
 
-$md-customyellow: (
-    50 : #faf6eb,
-    100 : #f3e9ce,
-    200 : #ecdbae,
-    300 : #e4cc8d,
-    400 : #dec174,
-    500 : #d8b65c,
-    600 : #d4af54,
-    700 : #cea64a,
-    800 : #c89e41,
-    900 : #bf8e30,
-    A100 : #ffffff,
-    A200 : #ffeed0,
-    A400 : #ffdc9d,
-    A700 : #ffd384,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #000000,
-        400 : #000000,
-        500 : #000000,
-        600 : #000000,
-        700 : #000000,
-        800 : #000000,
-        900 : #000000,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
-);
-
-$md-customblack: (
-    50 : #e2e3e4,
-    100 : #b6babc,
-    200 : #858c8f,
-    300 : #545e62,
-    400 : #2f3c40,
-    500 : #0a191e,
-    600 : #09161a,
-    700 : #071216,
-    800 : #050e12,
-    900 : #03080a,
-    A100 : #4fc4ff,
-    A200 : #1cb3ff,
-    A400 : #009be8,
-    A700 : #008ace,
+$md-customgrey: (
+    50 : #e8e8e8,
+    100 : #c7c7c7,
+    200 : #a1a1a1,
+    300 : #7b7b7b,
+    400 : #5f5f5f,
+    500 : #434343,
+    600 : #3d3d3d,
+    700 : #343434,
+    800 : #2c2c2c,
+    900 : #1e1e1e,
+    A100 : #f07878,
+    A200 : #eb4a4a,
+    A400 : #ff0303,
+    A700 : #e90000,
     contrast: (
         50 : #000000,
         100 : #000000,
@@ -98,20 +65,19 @@ $md-customblack: (
         800 : #ffffff,
         900 : #ffffff,
         A100 : #000000,
-        A200 : #000000,
+        A200 : #ffffff,
         A400 : #ffffff,
         A700 : #ffffff,
     )
 );
 
 
-
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
-$candy-app-primary: mat-palette($md-customgreen);
-$candy-app-accent:  mat-palette($md-customyellow);
-$candy-app-warn:    mat-palette($mat-deep-orange);
+$candy-app-primary: mat-palette($md-customorange);
+$candy-app-accent:  mat-palette($md-customgrey);
+$candy-app-warn:    mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $candy-app-theme: mat-dark-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);

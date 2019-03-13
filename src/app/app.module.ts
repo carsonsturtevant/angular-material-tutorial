@@ -12,7 +12,9 @@ import { AppRouters } from './app.routes';
 import {DataService } from './data/data.service';
 import {AuthService} from './auth.service';
 import { PostDialogComponent } from './post-dialog/post-dialog.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatStepperModule, MatInputModule, MatButtonModule} from '@angular/material';
+import {NgsRevealModule} from 'ngx-scrollreveal';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,12 @@ import {FormsModule} from '@angular/forms';
     MaterialModule,
     FlexLayoutModule,
     AppRouters,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatStepperModule,
+    MatInputModule,
+    MatButtonModule,
+    NgsRevealModule
   ],
   providers: [DataService, AuthService],
   bootstrap: [AppComponent],
