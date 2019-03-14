@@ -3,12 +3,21 @@
   <br>
 
   <div class="container" fxLayout="row" fxLayoutAlign="center center" class="content">
-    <mat-horizontal-stepper [linear]="isLinear" #stepper >
+    <p>
+      Use this calculator to determine your ideal carbohydrate, fat, and protein amounts based upon your height, weight,
+      age, sex, weight goal, and activity level!
+    </p>
+  </div>
+
+  <br>
+  <!-- TODO - make stepper responsive -->
+  <div class="container" fxLayout="row" fxLayoutAlign="center center" class="content">
+    <mat-horizontal-stepper labelPosition="bottom" [linear]="true" #stepper (selectionChange)="calculateMacros()">
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
           <ng-template matStepLabel>Enter your height</ng-template>
           <mat-form-field>
-            <input matInput placeholder="height" formControlName="firstCtrl" required> 
+            <input matInput placeholder="height" formControlName="firstCtrl" required>
           </mat-form-field> inches
           <div>
             <button mat-button matStepperNext>Next</button>
@@ -20,7 +29,7 @@
         <form [formGroup]="secondFormGroup">
           <ng-template matStepLabel>Enter your weight</ng-template>
           <mat-form-field>
-            <input matInput placeholder="weight" formControlName="secondCtrl" required> 
+            <input matInput placeholder="weight" formControlName="secondCtrl" required>
           </mat-form-field> lbs
           <div>
             <button mat-button matStepperPrevious>Back</button>
@@ -30,58 +39,125 @@
       </mat-step>
 
       <mat-step [stepControl]="thirdFormGroup">
-          <form [formGroup]="thirdFormGroup">
-            <ng-template matStepLabel>Enter your age</ng-template>
-            <mat-form-field>
-              <input matInput placeholder="age" formControlName="thirdCtrl" required> 
-            </mat-form-field> years
-            <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
-            </div>
-          </form>
-        </mat-step>
+        <form [formGroup]="thirdFormGroup">
+          <ng-template matStepLabel>Enter your age</ng-template>
+          <mat-form-field>
+            <input matInput placeholder="age" formControlName="thirdCtrl" required>
+          </mat-form-field> years
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
 
-        <mat-step [stepControl]="fourthFormGroup">
-            <form [formGroup]="fourthFormGroup">
-              <ng-template matStepLabel>Enter M or F</ng-template>
-              <mat-form-field>
-                <input matInput placeholder="M or F" formControlName="fourthCtrl" required> 
-              </mat-form-field>
-              <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
-              </div>
-            </form>
-          </mat-step>
+      <mat-step [stepControl]="fourthFormGroup">
+        <form [formGroup]="fourthFormGroup">
+          <ng-template matStepLabel>Enter Male or Female</ng-template>
+          <mat-form-field>
+            <input matInput placeholder="Male or Female" formControlName="fourthCtrl" [(ngModel)]="selectedMOrF"
+              [matAutocomplete]="auto" required>
+          </mat-form-field>
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayMOrF">
+            <mat-option *ngFor="let o of filteredMOrFs | async" [value]="o">
+              {{o}}
+            </mat-option>
+          </mat-autocomplete>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
 
-          <mat-step [stepControl]="fifthFormGroup">
-              <form [formGroup]="fifthFormGroup">
-                <ng-template matStepLabel>Enter your weight goal</ng-template>
-                <mat-form-field>
-                  <input matInput placeholder="gain, lose, maintain" formControlName="fifthCtrl" required> 
-                </mat-form-field>
-                <div>
-                  <button mat-button matStepperPrevious>Back</button>
-                  <button mat-button matStepperNext>Next</button>
-                </div>
-              </form>
-            </mat-step>
+      <mat-step [stepControl]="fifthFormGroup">
+        <form [formGroup]="fifthFormGroup">
+          <ng-template matStepLabel>Enter your weight goal</ng-template>
+          <mat-form-field>
+            <input matInput placeholder="gain, lose, maintain" formControlName="fifthCtrl"
+              [(ngModel)]="selectedWeightGoal" [matAutocomplete]="auto2" required>
+          </mat-form-field>
+          <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayWeightGoal">
+            <mat-option *ngFor="let o of filteredWeightGoals | async" [value]="o">
+              {{o}}
+            </mat-option>
+          </mat-autocomplete>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="sixthFormGroup">
+        <form [formGroup]="sixthFormGroup">
+          <ng-template matStepLabel>Enter your activity level</ng-template>
+          <mat-form-field>
+            <input matInput placeholder="activity level" formControlName="sixthCtrl" [(ngModel)]="selectedActivityLevel"
+              [matAutocomplete]="auto3" required>
+          </mat-form-field>
+          <mat-autocomplete #auto3="matAutocomplete" [displayWith]="displayActivityLevel">
+            <mat-option *ngFor="let o of filteredActivityLevels | async" [value]="o">
+              {{o}}
+            </mat-option>
+          </mat-autocomplete>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
 
       <mat-step>
         <ng-template matStepLabel>Done</ng-template>
-        Details taken.
-        <div>
+        <div><br>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
+          <button mat-button (click)="reset(stepper)">Reset</button>
         </div>
       </mat-step>
 
     </mat-horizontal-stepper>
   </div>
 
+  <br><br>
 
+  <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="center" >
+    <div fxFlex="20%">
+      <mat-card class="example-card">
+        <mat-card-header fxLayoutAlign="center center">
+          <mat-card-title>Calories</mat-card-title>
+        </mat-card-header>
+        <h1 fxLayoutAlign="center center" style="font-size:xx-large" *ngIf="everythingIsGood">{{calories}} cal</h1>
+      </mat-card>
+    </div>
 
+    <div fxFlex="20%">
+      <mat-card class="example-card">
+        <mat-card-header fxLayoutAlign="center center">
+          <mat-card-title>Carbohydrates</mat-card-title>
+        </mat-card-header>
+        <h1 fxLayoutAlign="center center" style="font-size:xx-large" *ngIf="everythingIsGood">{{carbohydrates}}g</h1>
+      </mat-card>
+    </div>
+
+    <div fxFlex="20%">
+      <mat-card class="example-card">
+        <mat-card-header fxLayoutAlign="center center">
+          <mat-card-title>Fats</mat-card-title>
+        </mat-card-header>
+        <h1 fxLayoutAlign="center center" style="font-size:xx-large" *ngIf="everythingIsGood">{{fats}}g</h1>
+      </mat-card>
+    </div>
+
+    <div fxFlex="20%">
+      <mat-card class="example-card">
+        <mat-card-header fxLayoutAlign="center center">
+          <mat-card-title>Proteins</mat-card-title>
+        </mat-card-header>
+        <h1 fxLayoutAlign="center center" style="font-size:xx-large" *ngIf="everythingIsGood">{{proteins}}g</h1>
+      </mat-card>
+    </div>
+  </div>
 
   <!-- <br>
 
@@ -104,7 +180,7 @@
 
     <br> -->
 
-    <!-- <div class="container">
+  <!-- <div class="container">
       <div fxLayout="row" fxLayoutAlign="center center" class="content">
         <mat-card class="card">
           <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
