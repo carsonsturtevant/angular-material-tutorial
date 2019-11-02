@@ -9,6 +9,7 @@ This app is a macronutrient calculator that determines the user's suggested calo
 ## Architecture
 
 - Angular
+- Typescript
 - Node
 - OAuth
 - Material design
