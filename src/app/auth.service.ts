@@ -13,7 +13,7 @@ export class AuthService {
     clientID: 'SSsCyXU7O9id8MR2UyDwFjI5S7mFBARK',
     domain: '5ngwkq.auth0.com',
     responseType: 'token',
-    redirectUri: 'http://localhost:4200/',
+    redirectUri: 'https://angular-macro-calculator.herokuapp.com',
     scope: 'openid'
   });
 
